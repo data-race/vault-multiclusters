@@ -3,12 +3,13 @@
 https://developer.hashicorp.com/consul/docs/k8s/deployment-configurations/vault/wan-federation
 https://computingforgeeks.com/how-to-integrate-multiple-kubernetes-clusters-to-vault-server/
 
-![](app://local/Users/cui/Documents/Obsidian%20Vault/*%E9%99%84%E4%BB%B6/Pasted%20image%2020230104150629.png?1672815989618)
+![](assets/1.png)
 
 ## 创建EKS实例
 
 首先登录rwc-test 这个aws账户，在EKS中，创建两个实例，并为实例添加EKS节点组
-![[Pasted image 20230105105409.png | 350]]
+![](assets/2.png)
+
 运行以下的命令将eks 添加到本地的kubeconfig
 ``` shell
 aws eks update-kubeconfig --region ap-northeast-1 --name vault-primary-test
