@@ -120,8 +120,8 @@ EOF
 ```
 创建vault role和对应的service account
 ``` shell
-vault write auth/kubernetes-primary/role/internal-app \
-     bound_service_account_names=internal-app \
+vault write auth/kubernetes-primary/role/vault-primary-auth-sa \
+     bound_service_account_names=vault-primary-auth-sa \
      bound_service_account_namespaces=default \
      policies=internal-app \
      ttl=24h
@@ -152,7 +152,7 @@ spec:
       labels:
         app: orgchart
     spec:
-      serviceAccountName: internal-app
+      serviceAccountName: vault-primary-auth-sa
       containers:
         - name: orgchart
           image: jweissig/app:0.0.1
@@ -172,7 +172,8 @@ spec:
     metadata:
       annotations:
         vault.hashicorp.com/agent-inject: 'true'
-        vault.hashicorp.com/role: 'internal-app'
+        vault.hashicorp.com/role: 'vault-primary-auth-sa'
+        vault.hashicorp.com/auth-path: 'auth/kubernetes-primary'
         vault.hashicorp.com/agent-inject-secret-test-secret.txt: 'test/data/foo/bar'
 ```
 
