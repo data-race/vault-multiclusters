@@ -1,0 +1,11 @@
+server:
+  dev:
+    enabled: true
+  service:
+    enabled: true
+    type: LoadBalancer
+injector:
+  enabled: true
+  authPath: auth/kubernetes-primary
+ui:
+  enabled: true

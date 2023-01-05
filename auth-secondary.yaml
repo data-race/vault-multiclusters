@@ -1,0 +1,29 @@
+# auth-secondary.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: vault-secondary-auth-method
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+- kind: ServiceAccount
+  name: vault-secondary-auth-sa
+  namespace: default
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vault-secondary-auth-sa
+  namespace: default
+---
+#! https://stackoverflow.com/questions/72256006/service-account-secret-is-not-listed-how-to-fix-it
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vault-sa-secret
+  namespace: default
+  annotations:
+    kubernetes.io/service-account.name: "vault-secondary-auth-sa"
+type: kubernetes.io/service-account-token

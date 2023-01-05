@@ -1,0 +1,8 @@
+# vault-secondary.yaml
+server:
+  enabled: false
+injector:
+  enabled: true
+  # 注意这里的的Vault addr和auth PATH
+  externalVaultAddr: http://a6475cccfd0cb4542b7932ca81601985-495689718.ap-northeast-1.elb.amazonaws.com:8200
+  authPath: auth/kubernetes-secondary
